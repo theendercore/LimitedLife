@@ -41,7 +41,7 @@ object LiminalCommand {
         resetNode.addChild(resetNodePlayerArg)
 
 
-        val locNode = literal("display_location").build()
+        val locNode = literal("display_location").executes(::getLoc).build()
         liminalNode.addChild(locNode)
 
         val getLocNode = literal("get").executes(::getLoc).build()
@@ -56,10 +56,10 @@ object LiminalCommand {
         locNode.addChild(testLocNode)
 
 
-        val reloadConfig = literal("reload_config").requires { it.hasPermissionLevel(2) }.executes(::reloadConfig).build()
+        val reloadConfig =
+            literal("reload_config").requires { it.hasPermissionLevel(2) }.executes(::reloadConfig).build()
         liminalNode.addChild(reloadConfig)
     }
-
 
     private fun getLives(c: CommandContext<ServerCommandSource>): Int {
         val src = c.source
