@@ -9,5 +9,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "LimitedLife"
+rootProject.name = "LiminalLife"
 

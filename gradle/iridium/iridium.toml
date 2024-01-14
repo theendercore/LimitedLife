@@ -1,8 +1,8 @@
-projectTitle = "LimitedLife"
-modId = "limited_life"
+projectTitle = "LiminalLife"
+modId = "liminal_life"
 githubRepo = "theendercore/LimitedLife"
 discordServerInviteId = "KZ5Q364hEg"
-authors = [ "brokenfuse" ]
+authors = [ "theendercore" ]
 majorMinecraftVersion = "1.20"
 minecraftVersion = "1.20.2"
 fabricLoaderVersion = "0.15.3"

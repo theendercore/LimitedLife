@@ -1,2 +1,2 @@
-# Limited Life
+# Liminal Life
 life but limited

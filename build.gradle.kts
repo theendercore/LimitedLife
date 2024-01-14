@@ -12,7 +12,7 @@ plugins {
 group = project.properties["maven_group"]!!
 version = project.properties["mod_version"]!!
 base.archivesName.set(project.properties["archives_base_name"] as String)
-description = "TeamVoided Template"
+description = "liminal life"
 val modid: String by project
 val server_translations: String by project
 val player_data_api: String by project
@@ -30,9 +30,9 @@ repositories {
 
 modSettings {
     modId(modid)
-    modName("Limited Life")
+    modName("Liminal Life")
 
-    entrypoint("main", "org.teamvoided.limited_life.LimitedLife::commonInit")
+    entrypoint("main", "org.teamvoided.liminal_life.LiminalLife::commonInit")
 }
 
 dependencies {
