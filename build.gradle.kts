@@ -12,7 +12,7 @@ plugins {
 group = project.properties["maven_group"]!!
 version = project.properties["mod_version"]!!
 base.archivesName.set(project.properties["archives_base_name"] as String)
-description = "liminal life"
+description = "This mod adds a Semi-Hardcore mode. This means you have limited lives and if you die to many times you will no longet be able to play."
 val modid: String by project
 val server_translations: String by project
 val player_data_api: String by project

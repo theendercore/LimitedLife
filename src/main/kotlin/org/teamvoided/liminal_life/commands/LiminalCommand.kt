@@ -22,7 +22,7 @@ import org.teamvoided.liminal_life.data.LifeData.setLives
 
 object LiminalCommand {
     fun init(dispatcher: CommandDispatcher<ServerCommandSource>) {
-        val liminalNode = literal("liminal_life").build()
+        val liminalNode = literal("liminal_life").executes(::getLives).build()
         dispatcher.root.addChild(liminalNode)
 
 
@@ -35,7 +35,7 @@ object LiminalCommand {
 
         lifeNode.addNode("remove", ::removeLives)
 
-        val resetNode = literal("reset").requires { it.hasPermissionLevel(2) }.build()
+        val resetNode = literal("reset").requires { it.hasPermission(2) }.build()
         lifeNode.addChild(resetNode)
         val resetNodePlayerArg = argument("target", EntityArgumentType.players()).executes(::resetLives).build()
         resetNode.addChild(resetNodePlayerArg)
@@ -57,7 +57,7 @@ object LiminalCommand {
 
 
         val reloadConfig =
-            literal("reload_config").requires { it.hasPermissionLevel(2) }.executes(::reloadConfig).build()
+            literal("reload_config").requires { it.hasPermission(2) }.executes(::reloadConfig).build()
         liminalNode.addChild(reloadConfig)
     }
 
@@ -185,7 +185,7 @@ object LiminalCommand {
     }
 
     private fun LiteralCommandNode<ServerCommandSource>.addNode(name: String, command: Command<ServerCommandSource>) {
-        val root = literal(name).requires { it.hasPermissionLevel(2) }.build()
+        val root = literal(name).requires { it.hasPermission(2) }.build()
         this.addChild(root)
         val playerArg = argument("target", EntityArgumentType.players()).build()
         root.addChild(playerArg)

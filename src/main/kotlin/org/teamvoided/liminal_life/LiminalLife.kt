@@ -11,6 +11,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.world.GameMode
+import net.minecraft.world.World
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.teamvoided.liminal_life.commands.LiminalCommand
@@ -31,11 +32,19 @@ object LiminalLife {
         log.info("Limiting Liminal Lives ...")
         LifeData.init()
         LiminalLifeConfig.load()
-        ServerPlayerEvents.AFTER_RESPAWN.register { _, player, _ ->
-            when (val lives = player.removeLives()) {
-                0, null -> player.killPlayer()
-                in 1..LiminalLifeConfig.config.maxLifeCount -> player.sendSystemMessage(tTxt("You have %s lives left!", lives))
-                else -> player.sendSystemMessage(tTxt("There was an error please message an admin!"))
+        ServerPlayerEvents.AFTER_RESPAWN.register { old, player, _ ->
+            if (!old.isInTeleportationState && World.END == old.world.registryKey) {
+                when (val lives = player.removeLives()) {
+                    0, null -> player.killPlayer()
+                    in 1..LiminalLifeConfig.config.maxLifeCount -> player.sendSystemMessage(
+                        tTxt(
+                            "You have %s lives left!",
+                            lives
+                        )
+                    )
+
+                    else -> player.sendSystemMessage(tTxt("There was an error please message an admin!"))
+                }
             }
         }
         CommandRegistrationCallback.EVENT.register { dispatcher, _, _ -> LiminalCommand.init(dispatcher) }
