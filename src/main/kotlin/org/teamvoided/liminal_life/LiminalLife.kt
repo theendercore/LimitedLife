@@ -33,15 +33,11 @@ object LiminalLife {
         LifeData.init()
         LiminalLifeConfig.load()
         ServerPlayerEvents.AFTER_RESPAWN.register { old, player, _ ->
-            if (!old.isInTeleportationState && World.END == old.world.registryKey) {
+            if (!(old.isInTeleportationState && World.END == old.world.registryKey)) {
                 when (val lives = player.removeLives()) {
                     0, null -> player.killPlayer()
-                    in 1..LiminalLifeConfig.config.maxLifeCount -> player.sendSystemMessage(
-                        tTxt(
-                            "You have %s lives left!",
-                            lives
-                        )
-                    )
+                    in 1..LiminalLifeConfig.config.maxLifeCount ->
+                        player.sendSystemMessage(tTxt("You have %s lives left!", lives))
 
                     else -> player.sendSystemMessage(tTxt("There was an error please message an admin!"))
                 }
